@@ -1,11 +1,12 @@
 package com.abansod.plugin.docker.images
 
 import org.gradle.testkit.runner.GradleRunner
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-
+@Ignore
 class PushDockerImageTest extends Specification {
     @Rule
     final TemporaryFolder testProjectDir = new TemporaryFolder()
@@ -28,10 +29,10 @@ class PushDockerImageTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.akshay.plugin.docker'
+                id 'com.abansod.plugin.docker'
             }
-        import com.akshay.plugin.docker.images.BuildDockerImage
-        import com.akshay.plugin.docker.images.PushDockerImage
+        import com.abansod.plugin.docker.images.BuildDockerImage
+        import com.abansod.plugin.docker.images.PushDockerImage
         task dockerBuildImage(type: BuildDockerImage){
         tags = ['localhost:5000/testbuild:build-ss']
         dockerFile = project.file('docker/Dockerfile')

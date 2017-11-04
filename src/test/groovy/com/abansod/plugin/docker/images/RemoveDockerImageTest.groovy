@@ -27,10 +27,10 @@ class RemoveDockerImageTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.akshay.plugin.docker'
+                id 'com.abansod.plugin.docker'
             }
-        import com.akshay.plugin.docker.images.BuildDockerImage
-        import com.akshay.plugin.docker.images.RemoveDockerImage
+        import com.abansod.plugin.docker.images.BuildDockerImage
+        import com.abansod.plugin.docker.images.RemoveDockerImage
         
         task dockerBuildImage(type: BuildDockerImage){
         tags = ['localhost:5000/testimage:build-xxx']

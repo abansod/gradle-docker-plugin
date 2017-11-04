@@ -29,7 +29,7 @@ class DockerPluginTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.akshay.plugin.docker'
+                id 'com.abansod.plugin.docker'
             }
         docker{
         imageName = 'test_image'

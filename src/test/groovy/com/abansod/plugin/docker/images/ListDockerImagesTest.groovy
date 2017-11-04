@@ -28,10 +28,10 @@ class ListDockerImagesTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.akshay.plugin.docker'
+                id 'com.abansod.plugin.docker'
             }
-        import com.akshay.plugin.docker.images.BuildDockerImage
-        import com.akshay.plugin.docker.images.ListDockerImages
+        import com.abansod.plugin.docker.images.BuildDockerImage
+        import com.abansod.plugin.docker.images.ListDockerImages
         task dockerBuildImage(type: BuildDockerImage){
         tags = ['localhost:5000/testbuild:build-ss']
         dockerFile = project.file('docker/Dockerfile')
@@ -62,10 +62,10 @@ class ListDockerImagesTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.akshay.plugin.docker'
+                id 'com.abansod.plugin.docker'
             }
-        import com.akshay.plugin.docker.images.BuildDockerImage
-        import com.akshay.plugin.docker.images.ListDockerImages
+        import com.abansod.plugin.docker.images.BuildDockerImage
+        import com.abansod.plugin.docker.images.ListDockerImages
         task dockerBuildImage(type: BuildDockerImage){
         tags = ['localhost:5000/testbuild:build-ss']
         dockerFile = project.file('docker/Dockerfile')

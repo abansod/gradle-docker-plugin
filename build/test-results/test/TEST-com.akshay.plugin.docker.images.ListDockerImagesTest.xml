@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.akshay.plugin.docker.images.ListDockerImagesTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-10-20T14:42:36" hostname="akshaybansod.local" time="9.398">
-  <properties/>
-  <testcase name="ListDockerImages" classname="com.akshay.plugin.docker.images.ListDockerImagesTest" time="8.949"/>
-  <testcase name="ListDockerImagesWithHandler" classname="com.akshay.plugin.docker.images.ListDockerImagesTest" time="0.449"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
