@@ -1,1 +1,6 @@
+sudo: required
+
 language: groovy
+
+services:
+  - docker
