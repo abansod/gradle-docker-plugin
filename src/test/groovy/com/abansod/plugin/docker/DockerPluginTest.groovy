@@ -48,7 +48,7 @@ class DockerPluginTest extends Specification {
         results.output.contains('Created image successfully with Image ID :')
     }
 
-    def "shouldPushDockerImageUsingBuildDockerImageTask"() {
+    def "shouldPushDockerImageUsingPushDockerImageTask"() {
         given:
         dockerFile << """
         FROM java:8-jre
@@ -77,7 +77,7 @@ class DockerPluginTest extends Specification {
 
     }
 
-    def "shouldRemoveDockerImageUsingBuildDockerImageTask"() {
+    def "shouldRemoveDockerImageUsingRemoveDockerImageTask"() {
         given:
         dockerFile << """
         FROM java:8-jre
