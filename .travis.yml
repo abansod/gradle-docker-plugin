@@ -10,4 +10,4 @@ before_install:
   - echo "gradle.publish.key=$GRADLE_PUSBLISH_KEY\ngradle.publish.secret=$GRADLE_PUSBLISH_SECRET" >> ~/.gradle/gradle.properties
 
 after_success:
-  - ./graldew publishPlugin
+  - ./gradlew publishPlugin
