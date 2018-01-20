@@ -9,5 +9,4 @@ before_install:
   - docker run -d -p 5000:5000 --name registry registry:2
 
 after_success:
-  - echo "gradle.publish.key=${GRADLE_PUSBLISH_KEY}\ngradle.publish.secret=${GRADLE_PUSBLISH_SECRET}" >> ~/.gradle/gradle.properties
   - ./gradlew publishPlugin

@@ -2,6 +2,9 @@ apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'com.gradle.plugin-publish'
 
+ext['gradle.publish.key'] = System.env.GRADLE_PUBLISH_KEY
+ext['gradle.publish.secret'] = System.env.GRADLE_PUBLISH_SECRET
+
 buildscript {
     repositories {
         maven {
