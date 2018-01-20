@@ -2,8 +2,6 @@ apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'com.gradle.plugin-publish'
 
-ext['gradle.publish.key'] = System.env.GRADLE_PUBLISH_KEY
-ext['gradle.publish.secret'] = System.env.GRADLE_PUBLISH_SECRET
 
 buildscript {
     repositories {
@@ -22,7 +20,7 @@ repositories {
 
 
 group = 'com.abansod.plugin'
-version = '1.0.0'
+version = '1.0.1'
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
