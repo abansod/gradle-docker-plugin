@@ -1,6 +1,10 @@
 package com.abansod.plugin.docker
 
 import com.abansod.plugin.docker.images.BuildDockerImage
+import com.abansod.plugin.docker.images.ListDockerImages
+import com.abansod.plugin.docker.images.PushDockerImage
+import com.abansod.plugin.docker.images.RemoveDockerImage
+import com.abansod.plugin.docker.images.TagDockerImage
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -12,15 +16,15 @@ class DockerPlugin implements Plugin<Project> {
         project.extensions.create('docker', DockerPluginExtension)
 
         project.afterEvaluate {
-
-            Task buildDockerImageTask = createBuildDockerImageTask(project)
-
+            def buildDockerImageTask = createBuildDockerImageTask(project)
+            def pushDockerImageTask = createPushDockerImageTask(project)
+            def removeDockerImage = createRemoveDockerImage(project)
         }
     }
 
     Task createBuildDockerImageTask(Project project) {
         DockerPluginExtension dockerExt = project.docker
-        project.task('buildDockerImage', type: BuildDockerImage) {
+        return project.task('buildDockerImage', type: BuildDockerImage) {
             if (dockerExt.inputDir) {
                 inputDir = dockerExt.inputDir
             }
@@ -28,7 +32,22 @@ class DockerPlugin implements Plugin<Project> {
                 dockerFile = dockerExt.dockerFile
             }
             tags = ["$dockerExt.registry/$dockerExt.imageName:$dockerExt.tag".toString()]
-
         }
     }
+
+    Task createPushDockerImageTask(Project project) {
+        DockerPluginExtension dockerExt = project.docker
+        return project.task('pushDockerImage', type: PushDockerImage){
+            imageName = "$dockerExt.registry/$dockerExt.imageName:$dockerExt.tag".toString()
+            tag = dockerExt.tag
+        }
+    }
+
+    Task createRemoveDockerImage(Project project){
+        DockerPluginExtension dockerExt = project.docker
+        return project.task('removeDockerImage', type: RemoveDockerImage){
+            imageId = "$dockerExt.registry/$dockerExt.imageName:$dockerExt.tag".toString()
+        }
+    }
+
 }

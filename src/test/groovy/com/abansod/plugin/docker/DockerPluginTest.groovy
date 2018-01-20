@@ -29,13 +29,14 @@ class DockerPluginTest extends Specification {
         """
         buildFile << """
         plugins {
-                id 'com.abansod.plugin.docker'
+                id 'com.abansod.plugin.docker' version '1.0.0'
             }
         docker{
-        imageName = 'test_image'
+            imageName = 'test_image'
+            registry = 'localhost:5000'
+            tag = 'build-xxx'
         }
         """
-
         when:
         def results = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
@@ -45,6 +46,62 @@ class DockerPluginTest extends Specification {
 
         then:
         results.output.contains('Created image successfully with Image ID :')
+    }
 
+    def "shouldPushDockerImageUsingBuildDockerImageTask"() {
+        given:
+        dockerFile << """
+        FROM java:8-jre
+        MAINTAINER reports-team
+        EXPOSE 8082
+        """
+        buildFile << """
+        plugins {
+                id 'com.abansod.plugin.docker' version '1.0.0'
+            }
+        docker{
+            imageName = 'test_image'
+            registry = 'localhost:5000'
+            tag = 'build-xxx'
+        }
+        """
+        when:
+        def results = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('buildDockerImage','pushDockerImage')
+                .withPluginClasspath()
+                .build()
+
+        then:
+        results.output.contains('Successfully pushed image: localhost:5000/test_image:build-xxx with build-xxx')
+
+    }
+
+    def "shouldRemoveDockerImageUsingBuildDockerImageTask"() {
+        given:
+        dockerFile << """
+        FROM java:8-jre
+        MAINTAINER reports-team
+        EXPOSE 8082
+        """
+        buildFile << """
+        plugins {
+                id 'com.abansod.plugin.docker' version '1.0.0'
+            }
+        docker{
+            imageName = 'test_image'
+            registry = 'localhost:5000'
+            tag = 'build-xxx'
+        }
+        """
+        when:
+        def results = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('buildDockerImage','removeDockerImage')
+                .withPluginClasspath()
+                .build()
+
+        then:
+        results.output.contains("Removed docker image : 'localhost:5000/test_image:build-xxx'")
     }
 }

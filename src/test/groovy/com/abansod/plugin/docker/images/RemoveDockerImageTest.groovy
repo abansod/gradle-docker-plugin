@@ -37,14 +37,14 @@ class RemoveDockerImageTest extends Specification {
         dockerFile = project.file('docker/Dockerfile')
         }
         
-        task removeDockerImage(type: RemoveDockerImage){
+        task dockerRemoveImage(type: RemoveDockerImage){
         imageId = 'localhost:5000/testimage:build-xxx'
         }
         """
         when:
         def results = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('dockerBuildImage','removeDockerImage')
+                .withArguments('dockerBuildImage','dockerRemoveImage')
                 .withPluginClasspath()
                 .build()
 
